@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Tasfia 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Cinzel:wght@600&family=Poppins:wght@300;500&family=Playfair+Display:ital@1&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============ GLOBAL ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a0033;
+      background: radial-gradient(circle at top, #2b0a4d 0%, #1a0033 60%, #0d001a 100%);
+      color: #f5d76e;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Page control */
+    .page { display: none; animation: fadeIn 1s ease-in; }
+    .page.active { display: block; }
+
+    /* =====audio======= FONTS & TEXT ============ */
+    .cursive-title { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #ffd700; text-shadow: 0 0 20px #ffd700, 0 0 40px #b8860b; margin-bottom: 10px; }
+    .gold-name { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: #ffdf80; text-shadow: 0 0 15px #ffcc00; margin-bottom: 15px; }
+    .subtitle { font-family: 'Montserrat', serif; font-size: 1.1rem; color: #e6c86e; letter-spacing: 2px; margin-bottom: 30px; }
+    .footer-note { margin-top: 40px; font-family: 'Dancing Script', cursive; color: #c9a227; font-size: 1.3rem; }
+
+    /* ============ BUTTONS ============ */
+    .btn {
+      display: inline-block; padding: 12px 25px; border: 2px solid #ffd700; border-radius: 30px;
+      color: #ffd700; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1rem;
+      background: rgba(255, 215, 0, 0.05); transition: all 0.4s ease;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.3); cursor: pointer;
+    }
+    .btn:hover { background: #ffd700; color: #1a0033; transform: translateY(-3px) scale(1.05); box-shadow: 0 0 25px #ffd700; }
+
+    /* ============ CONTAINERS ============ */
+    .container { text-align: center; padding: 50px 20px; max-width: 800px; margin: 0 auto; }
+    .nav-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+
+    /* ============ GALLERY ============ */
+    .gallery-vertical { display: flex; flex-direction: column; align-items: center; gap: 25px; margin: 30px auto; }
+    .photo-frame {
+      width: 400px; border: 3px solid #ffd700; border-radius: 15px; padding: 8px;
+      background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+      transition: transform 0.4s ease;
+    }
+    .photo-frame:hover { transform: scale(1.05) rotate(-1deg); }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+
+    /* ============ QUIZ ============ */
+    .quiz-q { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #ffdf80; margin: 20px 0; }
+    .quiz-options { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    .quiz-btn { width: 85%; }
+
+    /* ============ QUOTES ============ */
+    .quotes-list { display: flex; flex-direction: column; gap: 20px; margin: 30px 0; text-align: left; }
+    .quote-card {
+      background: linear-gradient(135deg, rgba(75, 0, 130, 0.6), rgba(43, 10, 77, 0.8));
+      border-left: 4px solid #ffd700; border-radius: 10px; padding: 20px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); transition: transform 0.3s;
+    }
+    .quote-card:hover { transform: translateX(10px); }
+    .quote-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #ffe9a8; }
+    .quote-by { display: block; margin-top: 10px; font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #ffd700; text-align: right; }
+
+    /* ============ LETTER ============ */
+    .envelope { position: relative; width: 200px; height: 140px; margin: 30px auto; cursor: pointer; transition: transform 0.5s; }
+    .envelope:hover { transform: scale(1.08) rotate(-3deg); }
+    .envelope .body { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #4b0082, #2b0a4d); border: 2px solid #ffd700; border-radius: 8px; box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
+    .envelope .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 100px solid transparent; border-right: 100px solid transparent; border-top: 70px solid #ffd700; z-index: 2; transform-origin: top; transition: transform 0.6s; }
+    .envelope.opened .flap { transform: rotateX(180deg); }
+    .envelope .heart { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 2rem; z-index: 3; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.2); } }
+    
+    .letter-paper { opacity: 0; max-height: 0; overflow: hidden; transition: all 1s; background: #fdf6e3; color: #4b0082; padding: 0 30px; border-radius: 15px; margin-top: 20px; box-shadow: 0 0 40px rgba(255, 215, 0, 0.4); text-align: left; }
+    .letter-paper.show { opacity: 1; max-height: 3000px; padding: 30px; }
+    .letter-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-align: center; margin-bottom: 20px; }
+    .letter-text { font-family: 'Caveat', cursive; font-size: 1.3rem; line-height: 1.8; margin-bottom: 15px; color: #3b0066; }
+    .letter-signoff { font-family: 'Dancing Script', cursive; font-size: 1.5rem; text-align: right; color: #6a0dad; margin-top: 20px; }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .back-btn { margin-top: 40px; margin-bottom: 20px; }
+
+    /* ============ BACKGROUND TEXT ============ */
+    .bg-text-container {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; opacity: 0.2;
+      pointer-events: none; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 40px; padding: 20px;
+    }
+    .bg-text-container span { font-family: 'Dancing Script', cursive; font-size: 4rem; color: #ff0095; transform: rotate(-15deg); white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <!-- Background Words -->
+  <div class="bg-text-container">
+    <span>Tasfia</span>
+    <span>Happy Birthday</span>
+    <span>💜 Bestie 💜</span>
+    <span>Pookie</span>
+    <span>Forever</span>
+    <span>My Person</span>
+    <span>Soul Sister</span>
+    <span>✨ Memories ✨</span>
+    <span>VIQI</span>
+  </div>
+
+  <!-- ================= HOME PAGE ================= -->
+  <div id="page-home" class="page active container">
+    <h1 class="cursive-title">Happy Birthday</h1>
+    <h2 class="gold-name">Tasfia ✨</h2>
+    <p class="subtitle">To my cousin, my friend, my forever person 💜</p>
+
+    <div class="nav-buttons" style="flex-direction: column; align-items: center; gap: 15px; margin-top: 30px;">
+      <p class="footer-note" style="margin-top: 0; margin-bottom: 10px;">USE AIRPODS FOR BETTER EXPERIENCE 💜</p>
+      <button onclick="showPage('gallery')" class="btn" style="width: 280px;">🎀 Memories</button>
+      <button onclick="showPage('quiz')" class="btn" style="width: 280px;"> 💖Relationship Quiz</button>
+      <button onclick="showPage('quotes')" class="btn" style="width: 280px;">🌙 Little But Precious</button>
+      <button onclick="showPage('letter')" class="btn" style="width: 280px;">💌 A Letter For You</button>
+      <button onclick="showPage('surprise')" class="btn" style="width: 280px; border-color: #ff0095; color: #ff0095;">🎁 A Surprise</button>
+    </div>
+  </div>
+
+    <!-- ================= GALLERY PAGE ================= -->
+    <div id="page-gallery" class="page container">
+      <h1 class="cursive-title">Captured and wrapped in beautiful Memory boxes in my heart</h1>
+      <p class="subtitle">😭💜😭</p>
+      
+      <div class="gallery-vertical">
+  
+        <!-- ১ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img4.jpeg" alt="Memory 1"></div>
+          <p class="memory-text">A Serene Smile with a cute version"</p>
+        </div>
+  
+        <!-- ২ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img2.jpeg" alt="Memory 2"></div>
+          <p class="memory-text">"4 teens only right now"</p>
+        </div>
+  
+        <!-- ৩ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img3.jpeg" alt="Memory 3"></div>
+          <p class="memory-text">"The only all"</p>
+        </div>
+  
+        <!-- ৪ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img1.jpeg" alt="Memory 4"></div>
+          <p class="memory-text">"THE 6v6 layout SELFIE"</p>
+        </div>
+  
+        <!-- ৫ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img5.jpeg" alt="Memory 5"></div>
+          <p class="memory-text">"The last Toggy ❤️"</p>
+        </div>
+  
+        <!-- ৬ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img6.jpeg" alt="Memory 6"></div>
+          <p class="memory-text">"2 With the OUTFIT MEMORY 🎀"</p>
+        </div>
+  
+        <!-- ৭ নম্বর ছবি -->
+        <div class="memory-box">
+          <div class="photo-frame"><img src="img7.jpeg" alt="Memory 7"></div>
+          <p class="memory-text">"So ELEGANT "</p>
+        </div>
+  
+        
+
+      </div>
+      <button onclick="showPage('home')" class="btn back-btn">← Back Home</button>
+    </div>
+  <!-- ================= QUIZ PAGE ================= -->
+  <div id="page-quiz" class="page container">
+    <h1 class="cursive-title">Our Bond Test</h1>
+    <p class="subtitle">Answer these 5 questions 💜</p>
+    <div id="quiz-content"></div>
+    <button onclick="showPage('home')" class="btn back-btn">← Back Home</button>
+  </div>
+
+  <!-- ================= QUOTES PAGE ================= -->
+  <div id="page-quotes" class="page container">
+    <h1 class="cursive-title">little but precious</h1>
+    <p class="subtitle">Little words, big love 💜</p>
+    
+    <div class="quotes-list">
+      <div class="quote-card"><p class="quote-text">"Cousins by blood, besties by heart — and pookies by soul."</p><span class="quote-by">— For Tasfia 💜</span></div>
+      <div class="quote-card"><p class="quote-text">"Of all the cousins in all the world, I got the coolest one — and she’s also my favorite human."</p><span class="quote-by">— Us, always 💛</span></div>
+      <div class="quote-card"><p class="quote-text">"Some people are family by birth. You became my friend by choice — and my pookie by destiny."</p><span class="quote-by">— Forever yours ✨</span></div>
+      <div class="quote-card"><p class="quote-text">Whenever you need me just text me</p><span class="quote-by">— As ur brother 💫</span></div>
+      <div class="quote-card"><p class="quote-text">"You are the sister I never had, the friend I always needed, and the pookie I never want to lose."</p><span class="quote-by">— To my Tasfia 🎂</span></div>
+    </div>
+    <button onclick="showPage('home')" class="btn back-btn">← Back Home</button>
+  </div>
+
+  <!-- ================= LETTER PAGE ================= -->
+  <div id="page-letter" class="page container">
+    <h1 class="cursive-title">A Letter For You</h1>
+    <p class="subtitle">Click the envelope to open 💜</p>
+
+    <div class="envelope" id="envelope" onclick="openLetter()">
+      <div class="flap"></div>
+      <div class="body"></div>
+      <div class="heart">💜</div>
+    </div>
+
+    <div class="letter-paper" id="letter">
+      <h2 class="letter-title">Dear Tasfia,</h2>
+      <p class="letter-text">Happy Birthday, my sweetest pookie, my favorite cousin, and my forever best friend. 🎂💜</p>
+      <p class="letter-text">From the day we were kids running around, fighting over silly things, to now — where we share secrets, and hype each other up . Every moment with you has been a blessing wrapped in gold.</p>
+      <p class="letter-text">Your smile is my so so so favorite . Your laugh is my comfort zone. And your presence? Pure magic.</p>
+      <p class="letter-text">As your cousin, I've watched you grow into someone so weaker but so kind, so unbelievably beautiful — inside and out. And as your friend, I've had the privilege of knowing the real you — the goofy, the dreamy, the dramatic, and the deeply loving soul.</p>
+      <p class="letter-text">On your special day, I wish you a life as golden as your heart. May every dream you whisper at midnight come true....(except those of being dead)... May you always find reasons to smile, people and friends who love you the way you deserve, and moments that feel like sunshine.</p>
+      <p class="letter-text">Thank you for being you. Thank you for being my sister. And thank you for making this whole "cousin + bestie" combo the most iconic thing ever.</p>
+      <p class="letter-text">Here's to more inside jokes, more late-night talks, more adventures, and a lifetime of memories together. 💫</p>
+      <p class="letter-signoff">With all my love, always,<br>Your adopted brother, Farhan 💜</p>
+    </div>
+    <div><button onclick="showPage('home')" class="btn back-btn">← Back Home</button></div>
+  </div>
+
+  <!-- ================= SURPRISE PAGE ================= -->
+  <div id="page-surprise" class="page container">
+    <h1 class="cursive-title">A Little Surprise</h1>
+    <p class="subtitle">A special voice note for you 🎙️💜</p>
+    
+    <!-- ভয়েস মেসেজ প্লেয়ার -->
+    <div style="margin: 40px auto; max-width: 400px; padding: 20px; background: rgba(255, 215, 0, 0.05); border: 2px solid #ff0095; border-radius: 20px; box-shadow: 0 0 20px rgba(255, 0, 149, 0.3);">
+      <p style="font-family: 'pacifico', kalam ; font-size: 1.5rem; color: #ff0095; margin-bottom: 15px;">Stored this recording even till now 🎧<br><br><hr> pls pause before going back </p>
+      
+      <!-- এখানে তোমার ভয়েস ফাইলের নাম দিতে হবে (যেমন: voice.mp3) -->
+      <audio id="voice-msg" controls style="width: 100%; outline: none; border-radius: 30px;" onplay="document.getElementById('bg-music').pause()" onpause="resumeBgMusic()">
+        <source src="voice.mp3" type="audio/mpeg"> 
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div><button onclick="showPage('home')" class="btn back-btn">← Back Home</button></div>
+  </div>
+
+
+  <script>
+    // ====== PAGE NAVIGATION LOGIC ======
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active');
+      window.scrollTo(0, 0); 
+      
+      // মিউজিক টেক্সট লজিক
+      const musicText = document.getElementById('music-text');
+      const bgMusic = document.getElementById('bg-music');
+
+      if (pageId === 'home') {
+        if (musicText) musicText.style.display = 'block'; 
+      } else {
+        if (musicText) musicText.style.display = 'none'; 
+      }
+
+      // 🎵 পেজ চেঞ্জের লজিক
+      if (bgMusic) {
+        if (pageId === 'surprise') {
+          bgMusic.pause(); 
+        } else {
+          if (bgMusic.currentTime > 0 && bgMusic.paused) {
+            bgMusic.play().catch(e => console.log(e)); 
+          }
+        }
+      }
+    }
+
+    // ভয়েস মেসেজ পজ হলে মেইন গান আবার চালু করার ফাংশন
+    function resumeBgMusic() {
+      const bgMusic = document.getElementById('bg-music');
+      // যদি সারপ্রাইজ পেজে না থাকি, তবেই গান আবার বাজবে
+      if (bgMusic && document.getElementById('page-surprise').classList.contains('active') === false) {
+         if (bgMusic.currentTime > 0) {
+            bgMusic.play().catch(e => console.log(e));
+         }
+      }
+    }
+         
+    // ====== LETTER OPEN LOGIC ======
+    function openLetter() {
+      document.getElementById('envelope').classList.add('opened');
+      document.getElementById('letter').classList.add('show');
+      setTimeout(() => {
+        document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+
+    // ====== QUIZ LOGIC ======
+    const quizData = [
+      { q: "What's my favorite thing about you?", options: ["Your laugh 😄", "Your kindness 💖", "Your craziness 👹", "ALL of it 💜"], correct: 3 },
+      { q: "When did our bond become unbreakable?", options: ["Day one", "Some random Tuesday", "When we shared secrets", "Every single day 💫"], correct: 3 },
+      { q: "What type of our bond would be when we will be grown up?", options: ["Weaker for our bad luck", "More stronger", "Unchanged"], correct: 1 },
+      { q: "What are we — cousin or friend first?", options: ["Cousin", "Friend", "Soulmate", "Both, always 💛💜"], correct: 3 },
+      { q: "How much do I love you?", options: ["A little", "A lot", "Infinity", "More than words ♾️"], correct: 3 }
+    ];
+    let currentQ = 0;
+    let score = 0;
+
+    function initQuiz() {
+      currentQ = 0;
+      score = 0;
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const container = document.getElementById('quiz-content');
+      if (currentQ >= quizData.length) {
+        container.innerHTML = `
+          <h2 class="gold-name">You scored ${score}/${quizData.length} 💜</h2>
+          <p class="subtitle">${score === quizData.length ? "You know us perfectly! 🥹💖" : "Aww, still cute! Let's make more memories ✨"}</p>
+        `;
+        return;
+      }
+
+      const data = quizData[currentQ];
+      container.innerHTML = `
+        <h2 class="gold-name">Question ${currentQ + 1}</h2>
+        <p class="quiz-q">${data.q}</p>
+        <div class="quiz-options">
+          ${data.options.map((opt, i) => `<button class="btn quiz-btn" onclick="checkAnswer(${i})">${opt}</button>`).join("")}
+        </div>
+      `;
+    }
+
+    function checkAnswer(index) {
+      if (index === quizData[currentQ].correct) score++;
+      currentQ++;
+      renderQuestion();
+    }
+    initQuiz();
+
+    // ====== FLOATING SPARKLES (Background Effect) ======
+    setInterval(() => {
+      const emojis = ["💜", "✨", "🎂", "💛", "🌟", "🎈", "💖"];
+      const span = document.createElement("span");
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.position = "fixed"; span.style.left = Math.random() * 100 + "vw";
+      span.style.bottom = "-50px"; span.style.fontSize = (Math.random() * 20 + 15) + "px";
+      span.style.opacity = 0.6; span.style.pointerEvents = "none"; span.style.zIndex = 0;
+      span.style.transition = `transform ${8 + Math.random() * 5}s linear, opacity ${8 + Math.random() * 5}s linear`;
+      document.body.appendChild(span);
+
+      setTimeout(() => {
+        span.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+        span.style.opacity = 0;
+      }, 100);
+      setTimeout(() => span.remove(), 15000);
+    }, 800);
+
+    // ====== AUTOMATIC BACKGROUND MUSIC ======
+    document.addEventListener('click', function playMusicOnClick() {
+      const audio = document.getElementById('bg-music');
+      if (audio && audio.paused) {
+        audio.play().catch(error => console.log("Waiting for click."));
+      }
+      document.removeEventListener('click', playMusicOnClick);
+    });
+    
+  </script>
+  
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="bg-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Press Anywhere Text -->
+  <div id="music-text" style="position: fixed; bottom: 2px; left: 53%; transform: translateX(-50%); font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #ffd500; text-shadow: 0 0 10px #641eef; pointer-events: none; animation: pulse 1.5s infinite; z-index: 999;">
+    ✨ press anywhere to play music ✨
+  </div>
+
+</body>
+</html>
